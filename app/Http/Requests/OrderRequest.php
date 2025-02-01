@@ -8,7 +8,6 @@ class OrderRequest extends FormRequest
 {
     public function authorize()
     {
-        // Если не нужно проверять авторизацию, можно вернуть true
         return true;
     }
 
@@ -18,10 +17,10 @@ class OrderRequest extends FormRequest
             'weight' => 'required|numeric',
             'region' => 'required|integer',
             'delivery_hours' => 'required|array',
-            'delivery_hours.*' => 'string',  // Каждое значение в delivery_hours должно быть строкой
-            'courier_id' => 'nullable|exists:couriers,id',  // Если courier_id передается, он должен существовать в таблице couriers
+            'delivery_hours.*' => 'string',
+            'courier_id' => 'nullable|exists:couriers,id',
             'assigned_at' => 'nullable|date',
-            'completed_at' => 'nullable|date',
+            'completed_at' => 'nullable|date|after_or_equal:assigned_at',  // Проверка на то, что дата завершения не раньше даты назначения
         ];
     }
 
@@ -37,6 +36,7 @@ class OrderRequest extends FormRequest
             'courier_id.exists' => 'Указанный курьер не существует',
             'assigned_at.date' => 'Дата назначения должна быть в формате даты',
             'completed_at.date' => 'Дата завершения должна быть в формате даты',
+            'completed_at.after_or_equal' => 'Дата завершения не может быть раньше даты назначения',  // Сообщение для нового правила
         ];
     }
 }

@@ -1,24 +1,28 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\CourierStoreRequest;
-use App\Models\Courier;
 use App\Http\Resources\CourierResource;
-
+use App\Services\CourierService;
 
 class CourierController extends Controller
 {
+    protected $courierService;
+
+    public function __construct(CourierService $courierService)
+    {
+        $this->courierService = $courierService;
+    }
+
     public function store(CourierStoreRequest $request)
     {
-        $courier = Courier::create($request->validated());
+        $courier = $this->courierService->createCourier($request->validated());
         return new CourierResource($courier);
     }
 
     public function show($id)
     {
-        $courier = Courier::findOrFail($id);
+        $courier = $this->courierService->getCourierById($id);
         return new CourierResource($courier);
     }
 }
