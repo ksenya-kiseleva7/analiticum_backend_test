@@ -25,7 +25,7 @@ class Courier extends Model
      */
     public function isAvailableForRegionAndTime($region, $time)
     {
-        if (!in_array($region, $this->regions)) {
+        if (! in_array($region, $this->regions)) {
             return false;
         }
 
@@ -43,7 +43,8 @@ class Courier extends Model
      */
     private function isTimeWithinWorkingHours($workingHours, $time)
     {
-        list($start, $end) = explode('-', $workingHours);
-        return ($time >= $start && $time <= $end);
+        [$start, $end] = explode('-', $workingHours);
+
+        return $time >= $start && $time <= $end;
     }
 }

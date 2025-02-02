@@ -10,7 +10,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'weight', 'region', 'delivery_hours', 'courier_id', 'assigned_at', 'completed_at'
+        'weight', 'region', 'delivery_hours', 'courier_id', 'assigned_at', 'completed_at',
     ];
 
     protected $casts = [

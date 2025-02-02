@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CourierStoreRequest;
@@ -17,12 +18,14 @@ class CourierController extends Controller
     public function store(CourierStoreRequest $request)
     {
         $courier = $this->courierService->createCourier($request->validated());
+
         return new CourierResource($courier);
     }
 
     public function show($id)
     {
         $courier = $this->courierService->getCourierById($id);
+
         return new CourierResource($courier);
     }
 }

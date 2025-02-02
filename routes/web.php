@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourierController;
 use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +26,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/orders/assign', [OrderController::class, 'assign']);
     Route::post('/orders/complete', [OrderController::class, 'complete']);
 });
-
-
-

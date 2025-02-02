@@ -11,6 +11,7 @@ class AuthService
     {
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
             return $user->createToken('API Token')->plainTextToken;
         }
 

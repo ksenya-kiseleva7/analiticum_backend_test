@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderStoreRequest;
 use App\Http\Resources\OrderResource;
-use App\Services\OrderService;
 use App\Models\Order;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -19,6 +20,7 @@ class OrderController extends Controller
     public function store(OrderStoreRequest $request)
     {
         $order = Order::create($request->validated());
+
         return new OrderResource($order);
     }
 
@@ -26,6 +28,7 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($request->order_id);
         $order = $this->orderService->assignCourier($order, $request->courier_id);
+
         return new OrderResource($order);
     }
 
@@ -33,6 +36,7 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($request->order_id);
         $order = $this->orderService->completeOrder($order);
+
         return new OrderResource($order);
     }
 }
