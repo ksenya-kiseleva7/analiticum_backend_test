@@ -18,7 +18,7 @@
 
 ### 1.Клонирование репозитория
 ```bash
-git clone https://github.com/твой-логин-на-github/твой-репозиторий.git
+https://github.com/ksenya-kiseleva7/analiticum_backend_test.git
 ```
 cd твой-репозиторий
 
